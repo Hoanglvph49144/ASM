@@ -101,7 +101,7 @@ const ManChinh = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerText}>Find the best coffee for you</Text>
-        <Ionicons name="person-circle-outline" size={30} color="#fff" />
+        <Ionicons name="person-circle-outline" marginTop={20} size={30} color="#fff" />
       </View>
       <TextInput
         style={styles.searchInput}
@@ -130,6 +130,25 @@ const ManChinh = () => {
         keyExtractor={(item) => item.id}
         style={styles.horizontalList}
       />
+
+<View style={styles.navigationBar}>
+        <TouchableOpacity style={styles.navButton}>
+          <Ionicons name="home-outline" size={24} color="#ff7f50" />
+          <Text style={styles.navText}>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton}>
+          <Ionicons name="cart-outline" size={24} color="#aaa" />
+          <Text style={styles.navText}>Cart</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton}>
+          <Ionicons name="heart-outline" size={24} color="#aaa" />
+          <Text style={styles.navText}>Favorites</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.navButton}>
+          <Ionicons name="notifications-outline" size={24} color="#aaa" />
+          <Text style={styles.navText}>Notifications</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -147,12 +166,13 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   headerText: {
+    marginTop: 20,
     fontSize: 24,
     fontWeight: "bold",
     color: "#fff",
   },
   searchInput: {
-    backgroundColor: "#2a2a2a",
+    backgroundColor: "#fff",
     borderRadius: 10,
     padding: 10,
     color: "#fff",
@@ -170,9 +190,10 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "#2a2a2a",
     borderRadius: 10,
-marginRight: 16,
+    marginRight: 16,
     padding: 10,
     width: 150,
+    height: 200,
   },
   image: {
     width: "100%",
@@ -204,6 +225,24 @@ marginRight: 16,
     backgroundColor: "#ff7f50",
     borderRadius: 5,
     padding: 5,
+  },
+  navigationBar: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "#1e1e1e",
+    paddingVertical: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#2a2a2a",
+  },
+  navButton: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  navText: {
+    fontSize: 12,
+    color: "#aaa",
+    marginTop: 2,
   },
 });
 
