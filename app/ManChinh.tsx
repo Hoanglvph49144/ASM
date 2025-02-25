@@ -1,249 +1,195 @@
-import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-const type = [{name: 'All'},{name:'Cappuccino'},{name:'Espresso'},{name:'Americano'},{name:'Macchiato'}]
-const coffeeData = [
-  {
-    id: "1",
-    name: "Cappuccino",
-    description: "With Steamed Milk",
-    price: "$4.20",
-    rating: 4.5,
-    image:require("../assets/images/cappuccino.png") ,
-  },
-  {
-    id: "2",
-    name: "Cappuccino",
-    description: "With Foam",
-    price: "$4.20",
-    rating: 4.2,
-    image:require("../assets/images/cappuccino2.png") ,
-  },
-  {
-    id: "3",
-    name: "Cappuccino",
-    description: "With Steamed Milk",
-    price: "$4.20",
-    rating: 4.5,
-    image:require("../assets/images/cappuccino.png") ,
-  },
-  {
-    id: "4",
-    name: "Cappuccino",
-    description: "With Steamed Milk",
-    price: "$4.20",
-    rating: 4.5,
-    image:require("../assets/images/cappuccino.png") ,
-  },
-];
+import React, { useEffect, useState, useContext } from 'react';
+import { 
+  View, Text, Image, TouchableOpacity, FlatList, 
+  StyleSheet, StatusBar, TextInput, Alert 
+} from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router'; 
 
-const beanData = [
-  {
-    id: "1",
-    name: "Robusta Beans",
-    description: "Medium Roasted",
-    price: "$4.20",
-    image:require("../assets/images/cafe.png") ,
-  },
-  {
-    id: "2",
-    name: "Cappuccino",
-    description: "With Steamed Milk",
-    price: "$4.20",
-    image:require("../assets/images/cafe.png") ,
-  },
-  {
-    id: "3",
-    name: "Cappuccino",
-    description: "With Steamed Milk",
-    price: "$4.20",
-    image:require("../assets/images/cafe.png") ,
-  },
-  {
-    id: "4",
-    name: "Cappuccino",
-    description: "With Steamed Milk",
-    price: "$4.20",
-    image:require("../assets/images/cafe.png") ,
-  },
-];
 
-const ManChinh = () => {
-  const renderItem = ({ item }: any) => (
-    <TouchableOpacity style={styles.card}>
-      <Image source={ item.image } style={styles.image} />
-      <Text style={styles.title}>{item.name}</Text>
-      <Text style={styles.description}>{item.description}</Text>
-      <View style={styles.row}>
-        <Text style={styles.price}>{item.price}</Text>
-        <TouchableOpacity style={styles.addButton}>
-          <Ionicons name="add" size={16} color="#fff" />
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
-  );
-  const typeItem = ({ item }: any) => {
-    return (
-      <TouchableOpacity>
-        <Text style={[styles.title , {paddingLeft: 20, fontSize: 18, }]}>{item.name}</Text>
-      </TouchableOpacity>
-    );
-  };
+const HomeScreen = () => {
+  const router = useRouter(); 
+  const [productsData, setProductsData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState(""); 
+
+
+  useEffect(() => {
+    fetch('https://67bc90f5ed4861e07b3b1328.mockapi.io/ASM')
+      .then(response => response.json())
+      .then(data => setProductsData(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
+
+
   return (
     <View style={styles.container}>
+      <StatusBar backgroundColor={'#0C0F14'} barStyle="light-content" />
+      
+      {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerText}>Find the best coffee for you</Text>
-        <Ionicons name="person-circle-outline" marginTop={20} size={30} color="#fff" />
+        <TouchableOpacity style={styles.backButton} onPress={() => router.push('/ManDN')}>
+                  <Ionicons name="arrow-back" size={24} color="white" />
+                </TouchableOpacity>
+                
+        <Text style={styles.title}>☕ Tìm kiếm cà phê ngon nhất</Text>
+       
       </View>
-      <TextInput
-        style={styles.searchInput}
-        placeholder="Find Your Coffee..."
-        placeholderTextColor="#aaa"
-      />
-      <FlatList
-        data={type}
-        renderItem={typeItem}
-        horizontal
-        keyExtractor={(item) => item.name}
-        style={styles.horizontalList}
-      />
-      <FlatList
-        data={coffeeData}
-        renderItem={renderItem}
-        horizontal
-        keyExtractor={(item) => item.id}
-        style={styles.horizontalList}
-      />
-      <Text style={styles.sectionTitle}>Coffee beans</Text>
-      <FlatList
-        data={beanData}
-        renderItem={renderItem}
-        horizontal
-        keyExtractor={(item) => item.id}
-        style={styles.horizontalList}
-      />
 
-<View style={styles.navigationBar}>
-        <TouchableOpacity style={styles.navButton}>
-          <Ionicons name="home-outline" size={24} color="#ff7f50" />
-          <Text style={styles.navText}>Home</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navButton}>
-          <Ionicons name="cart-outline" size={24} color="#aaa" />
-          <Text style={styles.navText}>Cart</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navButton}>
-          <Ionicons name="heart-outline" size={24} color="#aaa" />
-          <Text style={styles.navText}>Favorites</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.navButton}>
-          <Ionicons name="notifications-outline" size={24} color="#aaa" />
-          <Text style={styles.navText}>Notifications</Text>
-        </TouchableOpacity>
+      {/* Thanh tìm kiếm */}
+      <View style={styles.searchContainer}>
+        <Ionicons name="search" size={20} color="#aaa" style={styles.searchIcon} />
+        <TextInput
+          style={styles.searchBar}
+          placeholder="Tìm kiếm cà phê..."
+          placeholderTextColor="#aaa"
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+        />
       </View>
+
+      {/* Danh sách sản phẩm */}
+      <FlatList
+        data={productsData.filter(product =>
+          product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={() => {
+              router.push({
+                pathname: `/products/${item.id}`,
+                params: { 
+                  name: item.name, 
+                  avatar: item.avatar, 
+                  description: item.description, 
+                  price: item.price 
+                }
+              });
+            }}
+            style={styles.productCard}
+          >
+            <Image style={styles.productImage} source={{ uri: item.avatar }} />
+<Text style={styles.productName}>{item.name}</Text>
+            <Text style={styles.productPrice}>${Number(item.price).toFixed(2)}</Text>
+          
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        contentContainerStyle={styles.listContainer}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1e1e1e",
-    paddingHorizontal: 16,
+  container: { 
+    flex: 1, 
+    backgroundColor: '#0C0F14', 
+    paddingHorizontal: 15,
+    paddingTop: 40,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 15,
   },
-  headerText: {
-    marginTop: 20,
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#fff",
+  title: { 
+    color: 'white', 
+    fontSize: 22, 
+    fontWeight: 'bold',
+    flex: 1,
   },
-  searchInput: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
+  cartButton: {
+    backgroundColor: '#FF7F50',
     padding: 10,
-    color: "#fff",
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
-    marginVertical: 10,
-  },
-  horizontalList: {
-    marginBottom: 20,
-  },
-  card: {
-    backgroundColor: "#2a2a2a",
     borderRadius: 10,
-    marginRight: 16,
+    position: 'relative',
+  },
+  cartCountContainer: {
+    position: 'absolute',
+    top: -5,
+    right: -5,
+    backgroundColor: 'red',
+    borderRadius: 12,
+    width: 20,
+    height: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  cartCount: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  
+  // Search bar
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1E232B',
     padding: 10,
-    width: 150,
-    height: 200,
-  },
-  image: {
-    width: "100%",
-    height: 100,
     borderRadius: 10,
+    marginBottom: 15,
   },
-  title: {
+  searchIcon: {
+    marginRight: 10,
+  },
+  searchBar: {
+    flex: 1,
+    color: 'white',
     fontSize: 16,
-    fontWeight: "bold",
-    color: "#fff",
-    marginVertical: 5,
   },
-  description: {
-    fontSize: 12,
-    color: "#aaa",
+
+  // Product List
+  listContainer: { 
+    paddingBottom: 20, 
   },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: 10,
+  productCard: { 
+    backgroundColor: '#1C1F26', 
+    borderRadius: 15, 
+    padding: 10, 
+    margin: 8, 
+    flex: 1, 
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 3,
   },
-  price: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#fff",
+  productImage: { 
+    width: 120, 
+    height: 120, 
+    borderRadius: 15, 
+    marginBottom: 10,
   },
-  addButton: {
-    backgroundColor: "#ff7f50",
-    borderRadius: 5,
-    padding: 5,
+  productName: { 
+    color: 'white', 
+    fontSize: 16, 
+    fontWeight: '600', 
+    textAlign: 'center',
   },
-  navigationBar: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-    backgroundColor: "#1e1e1e",
-    paddingVertical: 10,
-    borderTopWidth: 1,
-    borderTopColor: "#2a2a2a",
+  productPrice: { 
+    color: '#D17842', 
+    fontSize: 16, 
+    fontWeight: 'bold', 
+    marginTop: 5,
   },
-  navButton: {
-    justifyContent: "center",
-    alignItems: "center",
+  addButton: { 
+    backgroundColor: '#FF7F50', 
+    padding: 6, 
+    borderRadius: 10, 
+    marginTop: 10, 
   },
-  navText: {
-    fontSize: 12,
-    color: "#aaa",
-    marginTop: 2,
-  },
+  backButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#21262E',
+    borderRadius: 10,
+  }
 });
 
-export default ManChinh;
+export default HomeScreen;

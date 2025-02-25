@@ -20,7 +20,7 @@ export default function ManDN() {
     const router = useRouter();
     const handleNavigate = () => {
         // Điều hướng đến màn hình "ManDK" khi bấm
-        router.push('/ManDN'); // Đảm bảo ManDK là một route hợp lệ trong dự án của bạn
+        router.push('/ManDN'); // Đảm bảo ManDK là một route hợp lệ trong dự án 
     };
 
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;

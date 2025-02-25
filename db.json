@@ -1,0 +1,93 @@
+{
+    "product": [
+      {
+        "id": "1",
+        "name": "Cappuccino",
+        "type": "Cappuccino",
+        "description": "With Steamed Milk",
+        "price": "$4.20",
+        "rating": "4.5",
+        "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ9NCYJ494YbN2xmfWH8gNmqU7l0E4dS6-0GIIu2_mnPAZBt7ZJ"
+      },
+      {
+        "id": "2",
+        "name": "Cappuccino",
+        "type": "Cappuccino",
+        "description": "With Foam",
+        "price": "$4.20",
+        "rating": "4.2",
+        "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ9NCYJ494YbN2xmfWH8gNmqU7l0E4dS6-0GIIu2_mnPAZBt7ZJ"
+      },
+      {
+        "id": "3",
+        "name": "Cappuccino",
+        "type": "Cappuccino",
+        "description": "With Foam",
+        "price": "$4.20",
+        "rating": "4.2",
+        "image": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ9NCYJ494YbN2xmfWH8gNmqU7l0E4dS6-0GIIu2_mnPAZBt7ZJ"
+      }
+    ],
+    "users": [
+      {
+        "id": "1",
+        "user": "admin",
+        "email": "admin@admin.com",
+        "pass": "admin"
+      },
+      {
+        "id": "2",
+        "user": "abc",
+        "email": "abc@gmail.com",
+        "pass": "123"
+      },
+      {
+        "id": "e370",
+        "name": "aaa",
+        "email": "aaa@gmail.com",
+        "password": "123456"
+      },
+      {
+        "id": "c197",
+        "name": "a",
+        "email": "a@gmail.com",
+        "password": "123456"
+      }
+    ],
+    "type": [
+      {
+        "id": "1",
+        "name": "Cappuccino"
+      },
+      {
+        "id": "2",
+        "name": "Espresso"
+      }
+    ],
+    "productBeans": [
+      {
+        "id": "1",
+        "name": "Robusta Beans",
+        "description": "Medium Roasted",
+        "price": "$4.20",
+        "rating": "4.5",
+        "image": "https://vn-test-11.slatic.net/p/02781b2eaf432c50330a30b547ad0ea3.jpg"
+      },
+      {
+        "id": "2",
+        "name": "Cappuccino",
+        "description": "With Foam",
+        "price": "$4.20",
+        "rating": "4.2",
+        "image": "https://vn-test-11.slatic.net/p/02781b2eaf432c50330a30b547ad0ea3.jpg"
+      },
+      {
+        "id": "3",
+        "name": "Cappuccino",
+        "description": "With Foam",
+        "price": "$4.20",
+        "rating": "4.2",
+        "image": "https://vn-test-11.slatic.net/p/02781b2eaf432c50330a30b547ad0ea3.jpg"
+      }
+    ]
+  }

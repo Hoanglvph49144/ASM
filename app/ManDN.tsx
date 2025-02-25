@@ -42,39 +42,34 @@ export default function ManDN() {
     };
 
     const handleSubmit = () => {
-        // Đánh dấu đã nhấn submit
         setIsSubmitted(true);
-
-        // Xóa lỗi cũ
         setEmailError('');
         setPasswordError('');
-
-        // Kiểm tra nếu email trống
+    
         if (!email) {
             setEmailError('Nhập Tài Khoản');
         }
-
-        // Kiểm tra nếu password trống
         if (!password) {
             setPasswordError('Nhập Mật Khẩu');
         }
-
-        // Nếu tất cả trường hợp hợp lệ
+    
         if (email && password) {
-            // Kiểm tra điều kiện đăng nhập
             if (!isEmailValid) {
                 setEmailError('Email không hợp lệ');
+            } else if (email === 'admin@gmail.com' && password === '123') {
+                Alert.alert('Thành công', 'Đăng nhập Admin thành công!', [
+                    {
+                        text: 'OK',
+                        onPress: () => router.push('/Admin'),
+                    },
+                ]);
             } else if (password !== '123456') {
                 setPasswordError('Mật khẩu không hợp lệ');
             } else {
-                Alert.alert('Thành công', 'Bạn đã đăng nhập thành công!',[
+                Alert.alert('Thành công', 'Bạn đã đăng nhập thành công!', [
                     {
                         text: 'OK',
-                        onPress: () => {
-                            // Điều hướng đến màn hình đăng nhập sau khi đăng ký thành công
-                            router.push('/ManChinh');
-                            
-                        },
+                        onPress: () => router.push('/ManChinh'),
                     },
                 ]);
             }
